@@ -1,13 +1,82 @@
- <!DOCTYPE html>
-  <html>
-  <head><title>ALPLM Security Alert System</title></head>
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPLM Security Alert System - Opt-In Registration</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; color: #333; }
+      h1 { font-size: 1.4em; }
+      label { display: block; margin-top: 16px; font-weight: bold; }
+      input[type="text"], input[type="tel"] { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; font-size: 1em; }
+      .consent-block { margin-top: 20px; display: flex; align-items: flex-start; gap: 10px; }
+      .consent-block input { margin-top: 3px; flex-shrink: 0; }
+      .consent-text { font-size: 0.9em; line-height: 1.5; }
+      button { margin-top: 24px; padding: 10px 24px; background: #1a73e8; color: white; border: none; font-size: 1em; cursor: pointer; border-radius: 4px; }
+      button:hover { background: #1558b0; }
+      .footer { margin-top: 40px; font-size: 0.8em; color: #666; border-top: 1px solid #ddd; padding-top: 16px; }
+      .success { background: #e6f4ea; border: 1px solid #34a853; padding: 16px; border-radius: 4px; display: none; }
+    </style>
+  </head>
   <body>
+
     <h1>ALPLM Security Alert System</h1>
-    <p>This system sends automated SMS notifications to authorized security
-    personnel when presence is detected in a monitored area.</p>
-    <p>Security team members receive these alerts as part of their designated
-    duties and have acknowledged they will receive automated notifications
-    from this system.</p>
-    <p>Message frequency: low volume (event-driven alerts only).</p>
+    <p>This system sends automated SMS notifications to authorized security personnel
+    when presence is detected in a monitored artifact display area.</p>
+    <p>Complete the form below to register as an authorized alert recipient.
+    Only pre-authorized security staff are eligible to register.</p>
+
+    <div class="success" id="successMsg">
+      <strong>Registration received.</strong> You will receive a confirmation SMS shortly.
+      Reply STOP at any time to unsubscribe.
+    </div>
+
+    <form action="https://formspree.io/f/xgoddpdn" method="POST" id="optInForm">
+
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required placeholder="Your full name">
+
+      <label for="phone">Mobile Phone Number</label>
+      <input type="tel" id="phone" name="phone" required placeholder="e.g. 2175551234">
+
+      <div class="consent-block">
+        <input type="checkbox" id="consent" name="consent" value="yes" required>
+        <label class="consent-text" for="consent">
+          I consent to receive automated SMS security alerts from the ALPLM artifact
+          monitoring system. Message frequency: fewer than 10 messages/month.
+          Message and data rates may apply. Reply <strong>STOP</strong> to opt out
+          at any time, <strong>HELP</strong> for help.
+        </label>
+      </div>
+
+      <input type="hidden" name="_subject" value="New ALPLM Security Alert Opt-In">
+      <input type="text" name="_gotcha" style="display:none">
+
+      <button type="submit">Register</button>
+    </form>
+
+    <div class="footer">
+      <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp;
+      <a href="terms.html">Terms &amp; Conditions</a><br><br>
+      For questions or to be removed from the recipient list: nickninjaneer@gmail.com
+    </div>
+
+    <script>
+      document.getElementById('optInForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var form = this;
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function(r) {
+          if (r.ok) {
+            form.style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+          }
+        });
+      });
+    </script>
+
   </body>
   </html>
