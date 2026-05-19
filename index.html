@@ -40,7 +40,7 @@
       <input type="tel" id="phone" name="phone" required placeholder="e.g. 2175551234">
 
       <div class="consent-block">
-        <input type="checkbox" id="consent" name="consent" value="yes" required>
+        <input type="checkbox" id="consent" name="consent" value="yes">
         <label class="consent-text" for="consent">
           I consent to receive automated SMS security alerts from Ninjaneering Specialties
           regarding the ALPLM artifact monitoring system. Message frequency: fewer than 10 messages/month.
@@ -49,6 +49,12 @@
         </label>
       </div>
 
+      <p style="font-size:0.8em; color:#666; margin-top:8px;">
+        Consent to receive SMS messages is not a condition of any service or transaction.
+        If you do not check the box above, your submission will be recorded but you will
+        not receive SMS alerts.
+      </p>
+      
       <input type="hidden" name="_subject" value="New ALPLM Security Alert Opt-In">
       <input type="text" name="_gotcha" style="display:none">
 
